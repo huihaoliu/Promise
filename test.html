@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise tests</title>
+    <script src="Promise.js"></script>
+</head>
+<body>
+<script>
+    new Promise(function (resolve,reject) {
+        setTimeout(function () {
+            reject(3)
+        },1000)
+        setTimeout(function () {
+            resolve(2)
+        },500)
+    }).then(function (val) {
+        console.log(val)
+    }).catch(function (reason) {
+        console.log('Error:' + reason)
+    })
+</script>
+</body>
+</html>

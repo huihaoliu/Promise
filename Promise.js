@@ -38,10 +38,28 @@
                         case 'pending':
                             callbacks.push([
                                 function () {
-                                    resolve(onFulfilled(result));
+                                    if(typeof onFulfilled === 'function'){
+                                        try {
+                                            resolve(onFulfilled(result));
+                                        } catch (ex) {
+                                            reject(ex);
+                                        }
+                                    }
+                                    else{
+                                        resolve(result);
+                                    }
                                 },
                                 function () {
-                                    reject(onRejected(result));
+                                    if(typeof onRejected === 'function'){
+                                        try {
+                                            reject(onRejected(result));
+                                        } catch (ex) {
+                                            reject(ex);
+                                        }
+                                    }
+                                    else{
+                                        reject(result);
+                                    }
                                 }
                             ]);
                             break;
